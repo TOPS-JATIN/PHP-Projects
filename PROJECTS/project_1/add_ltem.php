@@ -1,7 +1,8 @@
 
+<?php include_once 'header.php'?>
 <?php 
 
-session_start();
+
   if (isset($_REQUEST['submit'])) {
      echo "inside if";
       echo "<pre>";
@@ -24,19 +25,10 @@ session_start();
   }
  ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>add_item</title>
-  
-      <script src="./localstorage.js" defer></script>
-</head>
-<body>
+
 <h1>add_item</h1>
        
-       <form action="" method="post" enctype="multipart/form-data">
+       <form action="list.php" method="post" enctype="multipart/form-data" >
            
            <input class="feild price" id="item_name" type="text" name="item_name" placeholder="item_name" require>
            <input class="feild price" id="item_price" type="text" name="item_price" placeholder="item_price" require>
@@ -50,33 +42,12 @@ session_start();
        </form>
 <hr>
        <!-- <button id="Show_List">Show list</button> -->
-     <div id="LIST_Wrapper">
-        <?php 
-        if (isset($_REQUEST['submit'])) {
-              foreach($_SESSION["product"] as $key => $value) {
-              //  print_r($value);
-              //  print_r("<div class='card'><div class='card-body' id=$key><p  contenteditable='false' class='A_$key-card-text item_name'>$value[name]</p></div></div>");
-               print_r( "
-                  <div class='card' >
-                    <div class='card-body' id='$key'>
-                      <p  contenteditable='false' class='A_$key-card-text item_name'>$value[name]</p>
-                      <img src='./Storage/$value[item_img_name]' alt='IMG NOT FOUND'>
-                      <p  contenteditable='false' class='A_$key-card-text item_price'>$value[price]</p>
-                      <p  contenteditable='false' class='A_$key-card-text item_description'>$value[description]</p>
-                      <p  contenteditable='false' class='A_$key-card-text item_quantity'>$value[item_quantity]</p>
-                      <p  contenteditable='false' class='A_$key-card-text item_category'>$value[item_category]</p>
-                    
-                      <button id='EDIT' class='btn btn-primary' onclick='EDIT(this)'>Edit</button>
-                      <button id='DEL' class='btn btn-danger' onclick='DELETE(this)'>Delete</button>
-                    </div>
-                  </div>
-                  <hr/>"); 
-                
-              };
-         } 
-         ?>
-    </div> 
-</body>
-</html>
+    
+
+  <?php
+  if (isset($_REQUEST['submit'])) {
+
+    header('/project_1/list.php');
+   };
+  ?>
   
-        
