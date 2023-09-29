@@ -10,8 +10,9 @@
       print_r ($_FILES);
       echo "</pre>";
         $Storge = "F:/Xampp/xammp/htdocs/php/one/Files/PROJECTS/project_1/Storage/";
-        $id= uniqid().time();
         $img_name = $_FILES["item_image"]["name"];
+        $id='';
+        if($img_name != null){$id= uniqid().time();}
         move_uploaded_file($_FILES["item_image"]["tmp_name"],$Storge.$id.$img_name);
        $_SESSION["product"][] =["name"=>$_REQUEST["item_name"],"description"=>$_REQUEST["item_description"],
                                 "price"=>$_REQUEST["item_price"],"item_quantity"=>$_REQUEST["item_quantity"],
@@ -24,11 +25,10 @@
      
   }
  ?>
-
-
+    
 <h1>add_item</h1>
        
-       <form action="list.php" method="post" enctype="multipart/form-data" >
+       <form  method="post" enctype="multipart/form-data" >
            
            <input class="feild price" id="item_name" type="text" name="item_name" placeholder="item_name" require>
            <input class="feild price" id="item_price" type="text" name="item_price" placeholder="item_price" require>
@@ -43,11 +43,14 @@
 <hr>
        <!-- <button id="Show_List">Show list</button> -->
     
-
-  <?php
-  if (isset($_REQUEST['submit'])) {
-
-    header('/project_1/list.php');
+       <?php
+  if (isset($_REQUEST['submit']) && $_SESSION["product"]) {
+      echo "<pre>"; 
+      print_r($_SESSION["product"]);
+       echo "</pre>"; 
+       header("Location: list.php");
    };
   ?>
+
+ 
   
